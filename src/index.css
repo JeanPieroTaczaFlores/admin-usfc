@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: #0a0e14; color: #fff; font-family: 'Inter', sans-serif; min-height: 100vh; }
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #141f35; }
-::-webkit-scrollbar-thumb { background: #354660; border-radius: 3px; }
+body { background: #0a0a0a; color: #f2f2f2; font-family: 'Inter', sans-serif; min-height: 100vh; }
+::-webkit-scrollbar { width: 11px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: #333; border: 2px solid #0a0a0a; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #c9a227; }
 
 .btn { @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed; }

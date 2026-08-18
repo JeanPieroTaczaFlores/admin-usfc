@@ -4,9 +4,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        base: { 50:'#e6e8eb',100:'#c0c5cc',200:'#99a1ad',300:'#717c8e',400:'#536177',500:'#354660',600:'#2f3f59',700:'#27364f',800:'#202e46',900:'#141f35',950:'#0a0e14' },
-        accent: { DEFAULT:'#c9a227', light:'#e2c259', dark:'#9a7b1d' },
-        danger: '#ef4444', success: '#22c55e', warning: '#f59e0b',
+        base: { 50:'#f2f2f2',100:'#b3b3b3',200:'#999999',300:'#7a7a7a',400:'#6b7280',500:'#4a4a4a',600:'#333333',700:'#262626',800:'#1a1a1a',900:'#111111',950:'#0a0a0a' },
+        accent: { DEFAULT:'#c9a227', light:'#d4b23c', dark:'#9a7b1d' },
+        danger: '#c8102e', success: '#2e9e4f', warning: '#f59e0b',
       },
       fontFamily: { sans:['Inter','sans-serif'], display:['Oswald','sans-serif'] },
     },
