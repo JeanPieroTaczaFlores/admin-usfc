@@ -30,11 +30,11 @@ BEGIN
   );
 
   INSERT INTO auth.identities (
-    id, user_id, identity_data, provider, last_sign_in_at, created_at, updated_at
+    id, user_id, identity_data, provider, provider_id, last_sign_in_at, created_at, updated_at
   ) VALUES (
     v_user_id, v_user_id,
     jsonb_build_object('sub', v_user_id::text, 'email', p_email),
-    'email', NOW(), NOW(), NOW()
+    'email', p_email, NOW(), NOW(), NOW()
   );
 
   INSERT INTO public.usuarios (
