@@ -27,6 +27,9 @@ export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-950 px-4">
       <div className="card w-full max-w-md fade-in">
+        <div className="flex items-center justify-center gap-3 mb-6">
+          <img src="/logo.png" alt="USMCF" className="w-14 h-14 rounded-full" />
+        </div>
         <h1 className="font-display text-3xl font-bold text-center mb-2">Iniciar Sesión</h1>
         <p className="text-base-400 text-center mb-6">Panel Administrativo USMCF</p>
         {error && <div className="bg-danger/20 text-danger p-3 rounded-lg mb-4 text-sm">{error}</div>}

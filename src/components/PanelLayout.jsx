@@ -11,7 +11,10 @@ export default function PanelLayout({ children, title, tabs, activeTab, onTabCha
     <div className="min-h-screen bg-base-950">
       <nav className="flex items-center justify-between px-6 py-4 border-b border-base-800">
         <div className="flex items-center gap-6">
-          <Link to="/dashboard" className="font-display text-2xl font-bold text-accent">USMCF</Link>
+          <Link to="/dashboard" className="flex items-center gap-2 font-display text-2xl font-bold text-accent">
+            <img src="/logo.png" alt="USMCF" className="w-8 h-8 rounded-full" />
+            USMCF
+          </Link>
           <span className="text-base-500 text-sm">|</span>
           <span className="font-display text-lg">{title}</span>
         </div>

@@ -43,7 +43,10 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-base-950">
       <nav className="flex items-center justify-between px-6 py-4 border-b border-base-800">
-        <span className="font-display text-2xl font-bold text-accent">USMCF Admin</span>
+        <span className="flex items-center gap-2 font-display text-2xl font-bold text-accent">
+          <img src="/logo.png" alt="USMCF" className="w-8 h-8 rounded-full" />
+          USMCF Admin
+        </span>
         <div className="flex items-center gap-4">
           <span className="text-base-400 text-sm">Hola, <span className="text-white font-medium">{profile.nombre}</span></span>
           {(profile.rol === 'super_admin' || profile.rol === 'admin') && <a href="#/admin" className="text-sm text-accent hover:underline">Admin</a>}
