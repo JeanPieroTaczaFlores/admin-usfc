@@ -53,9 +53,12 @@ export default function AdminPanel() {
       const { error } = await supabase.from('usuarios').update(update).eq('id', form.id)
       if (error) { setMsg(error.message); return }
     } else {
-      const { data, error } = await supabase.auth.signUp({ email: form.email, password: form.password })
+      const { data, error } = await supabase.rpc('admin_create_user', {
+        p_email: form.email, p_password: form.password, p_nombre: form.nombre,
+        p_apellido: form.apellido, p_rol: form.rol, p_estado: form.estado,
+        p_rango: form.rango, p_nivel: form.nivel, p_creditos: form.creditos, p_monedas: form.monedas
+      })
       if (error) { setMsg(error.message); return }
-      await supabase.from('usuarios').insert({ id: data.user.id, email: form.email, nombre: form.nombre, apellido: form.apellido, rol: form.rol, estado: form.estado, rango: form.rango, nivel: form.nivel, creditos: form.creditos, monedas: form.monedas, xp: 0 })
     }
     setMsg(form.id ? 'Usuario actualizado' : 'Usuario creado'); setShowModal(null); setForm({}); loadData()
   }
