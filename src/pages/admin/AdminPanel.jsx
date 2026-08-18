@@ -53,14 +53,16 @@ export default function AdminPanel() {
       const { error } = await supabase.from('usuarios').update(update).eq('id', form.id)
       if (error) { setMsg(error.message); return }
     } else {
-      const { data, error } = await supabase.rpc('admin_create_user', {
-        p_email: form.email, p_password: form.password, p_nombre: form.nombre,
-        p_apellido: form.apellido, p_rol: form.rol, p_estado: form.estado,
-        p_rango: form.rango, p_nivel: form.nivel, p_creditos: form.creditos, p_monedas: form.monedas
+      const { data: existing } = await supabase.from('usuarios').select('id').eq('email', form.email).single()
+      if (existing) { setMsg('Ya existe un perfil con ese email'); return }
+      const { error } = await supabase.from('usuarios').insert({
+        id: crypto.randomUUID(), email: form.email, nombre: form.nombre,
+        apellido: form.apellido, rol: form.rol, estado: form.estado,
+        rango: form.rango, nivel: form.nivel, creditos: form.creditos || 0, monedas: form.monedas || 0, xp: 0
       })
       if (error) { setMsg(error.message); return }
     }
-    setMsg(form.id ? 'Usuario actualizado' : 'Usuario creado'); setShowModal(null); setForm({}); loadData()
+    setMsg(form.id ? 'Usuario actualizado' : 'Perfil creado. El usuario debe registrarse desde la página de Registro para activar su cuenta.'); setShowModal(null); setForm({}); loadData()
   }
 
   const handleMissionSubmit = async (e) => {
@@ -243,7 +245,7 @@ export default function AdminPanel() {
                 <input className="input" placeholder="Apellido" value={form.apellido||''} onChange={e=>setForm(p=>({...p,apellido:e.target.value}))} required />
               </div>
               <input type="email" className="input" placeholder="Email" value={form.email||''} onChange={e=>setForm(p=>({...p,email:e.target.value}))} required />
-              <input type="password" className="input" placeholder={form.id?'Nueva contraseña (vacío=no cambiar)':'Contraseña'} value={form.password||''} onChange={e=>setForm(p=>({...p,password:e.target.value}))} required={!form.id} />
+              <p className="text-base-500 text-xs">El usuario se activará cuando se registre desde la página de Registro.</p>
               <div className="grid grid-cols-2 gap-3">
                 <select className="input" value={form.rol||'usuario'} onChange={e=>setForm(p=>({...p,rol:e.target.value}))}>{ROLES.map(r=><option key={r} value={r}>{r}</option>)}</select>
                 <select className="input" value={form.estado||'activo'} onChange={e=>setForm(p=>({...p,estado:e.target.value}))}>{ESTADOS.map(e=><option key={e} value={e}>{e}</option>)}</select>

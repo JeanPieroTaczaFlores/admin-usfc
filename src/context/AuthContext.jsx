@@ -49,19 +49,21 @@ export function AuthProvider({ children }) {
     const { data, error } = await supabase.auth.signUp({ email, password })
     if (error) throw error
 
-    await supabase.from('usuarios').insert({
-      id: data.user.id,
-      email,
-      nombre,
-      apellido,
-      rol: 'usuario',
-      estado: 'pendiente',
-      rango: 'Civil',
-      nivel: 1,
-      xp: 0,
-      creditos: 0,
-      monedas: 0,
-    })
+    const { data: existing } = await supabase.from('usuarios').select('*').eq('email', email).single()
+
+    if (existing) {
+      await supabase.from('usuarios').update({
+        id: data.user.id,
+        nombre: nombre || existing.nombre,
+        apellido: apellido || existing.apellido,
+      }).eq('email', email)
+    } else {
+      await supabase.from('usuarios').insert({
+        id: data.user.id, email, nombre, apellido,
+        rol: 'usuario', estado: 'pendiente', rango: 'Civil',
+        nivel: 1, xp: 0, creditos: 0, monedas: 0,
+      })
+    }
 
     return data
   }
